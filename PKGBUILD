@@ -5,13 +5,19 @@ pkgdesc="Automate testing AUR packages in an isolated Docker environment"
 arch=('x86_64')
 url="https://github.com/LisZLisowni2/aur-tester"
 license=('MIT')
-depends=('docker', 'bash')
-source=("$pkgname")
+depends=('docker' 'bash')
+source=("git+https://github.com/LisZlisowni2/aur-tester.git")
 sha256sums=('SKIP')
 
+build() {
+	cd "$srcdir"
+	echo $srcdir
+	chmod +x $srcdir/aur-tester/src/aur-tester.sh
+}
+
 package() {
-	install -Dm755 "$srcdir/$pkgname" "$pkgdir/usr/bin/$pkgname"
-	install -Dm644 "$srcdir/LICENSE" "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+	install -Dm755 "$srcdir/aur-tester/src/aur-tester.sh" "$pkgdir/usr/bin/aur-tester"
+	install -Dm644 "$srcdir/aur-tester/LICENSE" "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
 }
 
 post_install() {
