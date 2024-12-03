@@ -10,19 +10,17 @@ source=("git+https://github.com/LisZlisowni2/aur-tester.git")
 sha256sums=('SKIP')
 
 build() {
-	cd "$srcdir"
-	echo $srcdir
-	chmod +x $srcdir/aur-tester/src/aur-tester.sh
+	chmod +x $srcdir/aur-tester.sh
 }
 
 package() {
-	install -Dm755 "$srcdir/aur-tester/src/aur-tester.sh" "$pkgdir/usr/bin/aur-tester"
-	install -Dm644 "$srcdir/aur-tester/LICENSE" "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+	install -Dm755 "$srcdir/aur-tester.sh" "$pkgdir/usr/bin/aur-tester"
+	install -Dm644 "$srcdir/LICENSE" "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
 }
 
 post_install() {
-	systemctl start docker
 	echo "Configuring Docker for user $(whoami)..."
+	systemctl start docker
 	if ! groups $(whoami) | grep -qw docker; then 
 		sudo groupadd -f docker
 		sudo usermod -aG docker $(whoami)
@@ -37,15 +35,8 @@ post_install() {
 	else
 		echo "Arch linux Docker image already exists"
 	fi
-
-	dockerfilepath = $pkgdir/etc/aurtester/
-	touch $dockerfilepath/Dockerfile
-	echo "FROM archlinux:latest" > $dockerfilepath/Dockerfile
-	echo "RUN pacman -Syu --noconfirm && \ " >> $dockerfilepath/Dockerfile
-	echo "	pacman -S --noconfirm base-devel git clamav" >> $dockerfilepath/Dockerfile
-	echo "RUN freshclam" >> $dockerfilepath/Dockerfile
-	echo "WORKDIR /aur-package" >> $dockerfilepath/Dockerfile
-	echo "ENTRYPOINT ['/bin/bash']" >> $dockerfilepath/Dockerfile
-	docker build -t aurtesterimage:$pkgver $dockerfilepath 
+	
+	echo "Create image of Dockerfile"
+	docker build -t aur-tester-image -f "$srcdir/Dockerfile" "$srcdir"
 	systemctl stop docker
 }
