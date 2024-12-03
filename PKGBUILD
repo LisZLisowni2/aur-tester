@@ -6,8 +6,8 @@ arch=('x86_64')
 url="https://github.com/LisZLisowni2/aur-tester"
 license=('MIT')
 depends=('docker' 'bash')
-source=("src/aur-tester.sh" "LICENSE" "Dockerfile")
-sha256sums=('SKIP')
+source=("Dockerfile" "src/aur-tester.sh" "LICENSE")
+sha256sums=('SKIP' 'SKIP' 'SKIP')
 
 build() {
 	chmod +x $srcdir/aur-tester.sh
