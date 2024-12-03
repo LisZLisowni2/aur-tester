@@ -6,7 +6,7 @@ arch=('x86_64')
 url="https://github.com/LisZLisowni2/aur-tester"
 license=('MIT')
 depends=('docker' 'bash')
-source=("Dockerfile" "src/aur-tester.sh" "LICENSE")
+source=("Dockerfile" "aur-tester.sh" "LICENSE")
 sha256sums=('SKIP' 'SKIP' 'SKIP')
 
 build() {
