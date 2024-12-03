@@ -16,11 +16,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up the environment
+      - name: Set up docker
         run: |
-          pacman -Syu --noconfirm
-          pacman -S --noconfirm base-devel git
+          docker pull archlinux:latest
           
-      - name: Build package
+      - name: Build package in docker container
         run: |
-          makepkg -si --noconfirm
+          docker run --rm -v $(pwd):/mnt archlinux:latest bash -c "
+            pacman -Syu --noconfirm &&
+            pacman -S --noconfirm git base-devel &&
+            cd /mnt &&
+            makepkg -si --noconfirm
+          "
