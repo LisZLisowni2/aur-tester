@@ -6,7 +6,7 @@ arch=('x86_64')
 url="https://github.com/LisZLisowni2/aur-tester"
 license=('MIT')
 depends=('docker' 'bash')
-source=("git+https://github.com/LisZlisowni2/aur-tester.git")
+source=("src/aur-tester.sh" "LICENSE" "Dockerfile")
 sha256sums=('SKIP')
 
 build() {
@@ -15,7 +15,7 @@ build() {
 
 package() {
 	install -Dm755 "$srcdir/aur-tester.sh" "$pkgdir/usr/bin/aur-tester"
-	install -Dm644 "$srcdir/LICENSE" "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+	install -Dm644 "LICENSE" "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
 }
 
 post_install() {
