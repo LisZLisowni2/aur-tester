@@ -1,0 +1,26 @@
+name: Build AUR Package
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: archlinux-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up the environment
+        run: |
+          pacman -Syu --noconfirm
+          pacman -S --noconfirm base-devel git
+          
+      - name: Build package
+        run: |
+          makepkg -si --noconfirm
