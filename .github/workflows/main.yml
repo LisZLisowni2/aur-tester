@@ -22,9 +22,10 @@ jobs:
           
       - name: Build package in docker container
         run: |
-          docker run --rm -v $(pwd):/mnt -u root archlinux:latest bash -c "
+          docker run --rm -v $(pwd):/mnt archlinux:latest bash -c "
             pacman -Syu --noconfirm &&
             pacman -S --noconfirm git base-devel &&
-            cd /mnt &&
-            makepkg -si --noconfirm
+            useradd -s /bin/bash builduser &&
+            echo 'builduser ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers &&
+            su - builduser -c 'cd /mnt && makepkg -si --noconfirm'
           "
