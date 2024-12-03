@@ -26,6 +26,8 @@ jobs:
             pacman -Syu --noconfirm &&
             pacman -S --noconfirm git base-devel &&
             useradd -m -s /bin/bash builduser &&
+            chown -R builduser /mnt &&
+            chmod -R u+w /mnt && 
             echo 'builduser ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers &&
-            su - builduser -c 'sudo cd /mnt && makepkg -si --noconfirm'
+            su - builduser -c 'cd /mnt && makepkg -si --noconfirm'
           "
