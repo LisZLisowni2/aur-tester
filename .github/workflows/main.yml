@@ -16,7 +16,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up docker
+      - name: Setup docker
         run: |
           docker pull archlinux:latest
           
@@ -31,6 +31,13 @@ jobs:
             echo 'builduser ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers &&
             su - builduser -c 'cd /mnt && makepkg -si --noconfirm'
           "
+          
+      - name: Upload built package as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: aur-package
+          path: ./package
+          
   test:
     runs-on: ubuntu-latest
     needs: build
@@ -38,11 +45,26 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+
+      - name: Download built package from artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: aur-package
+          path: ./package
+
+      - name: Setup docker
+        run: |
+          docker pull archlinux:latest
           
       - name: Test aur-tester
         run: |
-          docker exec AurTesterContainer bash -c "./aur-tester.sh actiona"
+          docker run --rm -v $(pwd)/package:/mnt archlinux:latest bash -c "
+            cd /mnt && ./aur-tester.sh actiona
+          "
 
       - name: Test aur-tester 2
         run: |
-          docker exec AurTesterContainer bash -c "./aur-tester.sh ventoy-bin"
+          docker run --rm -v $(pwd)/package:/mnt archlinux:latest bash -c "
+            cd /mnt && ./aur-tester.sh actiona
+          "
+
