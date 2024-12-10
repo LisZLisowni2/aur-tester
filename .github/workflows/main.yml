@@ -36,7 +36,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: aur-package
-          path: /mnt
+          path: ./package-directory/*
           
   test:
     runs-on: ubuntu-latest
@@ -50,7 +50,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: aur-package
-          path: /mnt
+          path: ./downloaded-package
 
       - name: Setup docker
         run: |
@@ -58,7 +58,7 @@ jobs:
           
       - name: Test aur-tester
         run: |
-          docker run --rm -v $(pwd)/package:/mnt archlinux:latest bash -c "
+          docker run --rm -v $(pwd)/downloaded-package:/mnt archlinux:latest bash -c "
             cd /mnt && ./aur-tester.sh actiona
           "
 
