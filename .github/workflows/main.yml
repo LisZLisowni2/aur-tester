@@ -1,4 +1,4 @@
-name: Build AUR Package
+name: Test AUR tester script
 
 on:
   push:
@@ -22,7 +22,7 @@ jobs:
           
       - name: Build package in docker container
         run: |
-          docker run --rm -v $(pwd):/mnt archlinux:latest bash -c "
+          docker run --name AurTesterContainer -v $(pwd):/mnt archlinux:latest bash -c "
             pacman -Syu --noconfirm &&
             pacman -S --noconfirm git base-devel &&
             useradd -m -s /bin/bash builduser &&
@@ -31,3 +31,18 @@ jobs:
             echo 'builduser ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers &&
             su - builduser -c 'cd /mnt && makepkg -si --noconfirm'
           "
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+          
+      - name: Test aur-tester
+        run: |
+          docker exec AurTesterContainer bash -c "./aur-tester.sh actiona"
+
+      - name: Test aur-tester 2
+        run: |
+          docker exec AurTesterContainer bash -c "./aur-tester.sh ventoy-bin"
