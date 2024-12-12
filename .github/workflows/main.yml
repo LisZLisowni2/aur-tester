@@ -36,7 +36,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: aur-package
-          path: ./package-directory/*
+          path: ./*
           
   test:
     runs-on: ubuntu-latest
