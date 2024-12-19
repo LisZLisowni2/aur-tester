@@ -58,8 +58,8 @@ jobs:
           
       - name: Test aur-tester
         run: |
-          docker run --rm -v $(pwd)/downloaded-package:/mnt archlinux:latest bash -c "
-            cd /mnt && sudo ./aur-tester.sh actiona
+          docker run --rm --user buildtest -v $(pwd)/downloaded-package:/mnt archlinux:latest bash -c "
+            cd /mnt && ./aur-tester.sh actiona
           "
 
       - name: Test aur-tester 2
