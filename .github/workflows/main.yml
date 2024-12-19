@@ -59,12 +59,12 @@ jobs:
       - name: Test aur-tester
         run: |
           docker run --rm -v $(pwd)/downloaded-package:/mnt archlinux:latest bash -c "
-            cd /mnt && ./aur-tester.sh actiona
+            cd /mnt && sudo ./aur-tester.sh actiona
           "
 
       - name: Test aur-tester 2
         run: |
           docker run --rm -v $(pwd)/package:/mnt archlinux:latest bash -c "
-            cd /mnt && ./aur-tester.sh actiona
+            cd /mnt && sudo ./aur-tester.sh ventoy-bin
           "
 
