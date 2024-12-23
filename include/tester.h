@@ -11,12 +11,12 @@ private:
 public:
     Tester(bool _verbose, bool _minimalScan, std::string _package);
     void test();
-    void runContainer();
-    void updateSystem();
-    void installPackage();
-    void differenceFile();
-    void scanForMalware();
-    void scanForRootkit();
+    inline void runContainer();
+    inline void updateSystem();
+    inline void installPackage();
+    inline void differenceFile();
+    inline void scanForMalware();
+    inline void scanForRootkit();
 };
 
 #endif

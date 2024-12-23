@@ -3,7 +3,8 @@
 
 #include <string>
 
-void executeCommand(const std::string& command);
+int executeCommand(const std::string& command);
 void handleFlags(int& argv, char** argc, std::string& packageName, bool& verbose, bool& minimalScan, const std::string& VERSION);
+void logCmd(const std::string& text);
 
 #endif // UTILS_H

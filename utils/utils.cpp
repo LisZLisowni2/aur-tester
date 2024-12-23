@@ -3,12 +3,14 @@
 #include <cstdlib>
 #include <iostream>
 #include <stdexcept>
+#include <ctime>
 
-void executeCommand(const std::string& command) {
+int executeCommand(const std::string& command) {
     int result = std::system(command.c_str());
     if (result != 0) {
         throw std::runtime_error("Command failed: " + command);
     }
+    return result;
 }
 
 void handleFlags(int& argv, char** argc, std::string& packageName, bool& verbose, bool& minimalScan, const std::string& VERSION) {
@@ -30,4 +32,12 @@ void handleFlags(int& argv, char** argc, std::string& packageName, bool& verbose
         }
         i++;
     }
+}
+
+void logCmd(const std::string& text) {
+    time_t timestamp;
+    struct tm datetime = *localtime(&timestamp);
+    char output[50];
+    strftime(output, 50, "%Y %b %d %H:%M:%S", &datetime);
+    std::cout << "[" << output << "] " << text << "\n";
 }
