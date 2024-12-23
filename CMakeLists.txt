@@ -8,7 +8,6 @@ include_directories(include)
 set(SOURCES
     src/main.cpp
     src/tester.cpp
-    src/runContainer.cpp
     utils/global.cpp
     utils/utils.cpp
 )

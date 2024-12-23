@@ -1,0 +1,8 @@
+build
+.vscode
+.github
+.gitignore
+aur-tester.sh
+PKGBUILD
+LICENSE
+Dockerfile

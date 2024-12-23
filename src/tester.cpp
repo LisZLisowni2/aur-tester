@@ -1,5 +1,4 @@
 #include "tester.h"
-#include "runContainer.cpp"
 #include <string>
 #include <iostream>
 #include <stdexcept>
@@ -15,8 +14,7 @@ Tester::~Tester() {
 }
 
 void Tester::test() {
-    runContainer();
-    // updateSystem();
+    std::cout << "Testing\n";
     // installPackage();
     // differenceFile();
     // scanForMalware();

@@ -8,8 +8,6 @@ private:
     bool verbose;
     bool minimalScan;
     std::string package;
-    inline void runContainer();
-    inline void updateSystem();
     inline void installPackage();
     inline void differenceFile();
     inline void scanForMalware();
