@@ -7,6 +7,7 @@ include_directories(include)
 
 set(SOURCES
     src/main.cpp
+    src/tester.cpp
     utils/utils.cpp
 )
 

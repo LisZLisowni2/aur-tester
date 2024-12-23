@@ -1,4 +1,5 @@
 #include "utils.h"
+#include "tester.h"
 #include <iostream>
 #include <cstdlib>
 #define VERSION "1.0.0"
@@ -19,5 +20,7 @@ int main(int argv, char** argc) {
         std::cout << "Package name not present\n";
         exit(2);
     }
+    Tester tester = Tester(verbose, minimalScan, packageName);
+    tester.test();
     return 0;
 }
