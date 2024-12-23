@@ -37,6 +37,6 @@ post_install() {
 	fi
 	
 	echo "Create image of Dockerfile"
-	docker build -t aur-tester-image -f "$srcdir/Dockerfile" "$srcdir"
+	docker build -t aur-tester-image:$pkgver -f "$srcdir/Dockerfile" "$srcdir"
 	systemctl stop docker
 }
