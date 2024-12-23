@@ -22,11 +22,11 @@ void handleFlags(int& argv, char** argc, std::string& packageName, bool& verbose
             exit(0);
         } else if (arg == "-s" || arg == "--minimal-scan") {
             minimalScan = true;
-        } else if (i == argv) {
+        } else if (arg[0] != '-') {
             packageName = argc[i];
         } else {
             std::cout << "Unknown option";
-            exit(1);
+            exit(3);
         }
         i++;
     }
