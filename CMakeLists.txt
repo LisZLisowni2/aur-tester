@@ -10,7 +10,4 @@ set(SOURCES
     utils/utils.cpp
 )
 
-add_executable(aurtester
-    src/main.cpp
-    utils/utils.cpp
-)
+add_executable(aurtester ${SOURCES})

@@ -1,3 +1,4 @@
 BindMount/
 *.log
 build
+.vscode

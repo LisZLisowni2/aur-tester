@@ -10,3 +10,24 @@ void executeCommand(const std::string& command) {
         throw std::runtime_error("Command failed: " + command);
     }
 }
+
+void handleFlags(int& argv, char** argc, std::string& packageName, bool& verbose, bool& minimalScan, const std::string& VERSION) {
+    int i = 1;
+    while (i < argv) {       
+        std::string arg = argc[i];
+        if (arg == "-v" || arg == "--verbose") {
+            verbose = true;
+        } else if (arg == "--version") {
+            std::cout << "aur-tester version: " << VERSION << "\n";
+            exit(0);
+        } else if (arg == "-s" || arg == "--minimal-scan") {
+            minimalScan = true;
+        } else if (i == argv) {
+            packageName = argc[i];
+        } else {
+            std::cout << "Unknown option";
+            exit(1);
+        }
+        i++;
+    }
+}
