@@ -89,15 +89,9 @@ run_docker_and_test() {
             git clone https://aur.archlinux.org/$PACKAGE_NAME.git && 
             cd $PACKAGE_NAME &&
             echo \"Sums\" &&
-            sha256sum PKGBUILD
-            if [ \$? -ne 0 ]; then
-                echo \"sha256sum failed, continuing...\"
-            fi &&
+            sha256sum PKGBUILD || echo \"sha256sum failed, continuing...\" &&
             echo \"Code\" &&
-            shellcheck PKGBUILD
-            if [ \$? -ne 0 ]; then
-                echo \"shellcheck failed, continuing...\"
-            fi &&
+            shellcheck PKGBUILD || echo \"shellcheck failed, continuing...\" &&
             echo \"Install\" &&
             makepkg -is --noconfirm \" &&
         find $pkgdir -type f > /tmp/after_install.txt &&
@@ -107,26 +101,14 @@ run_docker_and_test() {
         freshclam &&
         if [ \"$SCANALL\" = true ]; then
             echo \"Scan the system\" &&
-            clamscan -r
-            if [ \$? -ne 0 ]; then
-                echo \"clamscan failed, continuing...\"
-            fi
+            clamscan -r || echo \"clamscan failed, continuing...\" &&
             echo \"Scan for rootkits\" &&
-            rkhunter
-            if [ \$? -ne 0 ]; then
-                echo \"rkhunter failed, continuing...\"
-            fi
+            rkhunter || echo \"rkhunter failed, continuing...\"
         else
             echo \"Scan the system\" &&
-            cat /tmp/changed.txt | clamscan -
-            if [ \$? -ne 0 ]; then
-                echo \"clamscan failed, continuing...\"
-            fi
+            cat /tmp/changed.txt | clamscan - || echo \"clamscan failed, continuing...\" &&
             echo \"Scan for rootkits\" &&
-            rkhunter --scan-files=$(cat /tmp/changed.txt | tr '\n' ' ')
-            if [ \$? -ne 0 ]; then
-                echo \"clamscan failed, continuing...\"
-            fi
+            rkhunter --scan-files=$(cat /tmp/changed.txt | tr '\n' ' ') || echo \"clamscan failed, continuing...\"
         fi
     "
 }
