@@ -33,7 +33,7 @@ while [[ "$#" -gt 0 ]]; do
             shift
             ;;
         -s|--minimal-scan)
-            SCANALL="-s"
+            SCANMINIMAL="-s"
             shift
             ;;
         --version)
@@ -75,7 +75,7 @@ test_docker_service() {
 }
 
 run_docker_and_test() {
-    docker run --rm -it --name $PACKAGE_NAME-testing aur-tester-image:$VERSION $VERBOSE $SCANMINIMAL $PACKAGE_NAME
+    docker run --rm -it --user root --name $PACKAGE_NAME-testing aur-tester-image:$VERSION $VERBOSE $SCANMINIMAL $PACKAGE_NAME
 }
 
 test_docker_service

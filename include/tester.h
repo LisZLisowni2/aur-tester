@@ -8,8 +8,8 @@ private:
     bool verbose;
     bool minimalScan;
     std::string package;
+    inline void makeCopySystem(const std::string& name);
     inline void installPackage();
-    inline void differenceFile();
     inline void scanForMalware();
     inline void scanForRootkit();
 public:

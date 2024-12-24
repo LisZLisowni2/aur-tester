@@ -1,8 +1,8 @@
 #include "utils.h"
 #include "tester.h"
+#include "global.h"
 #include <iostream>
 #include <cstdlib>
-#define VERSION "1.0.0"
 
 int main(int argv, char** argc) {
     if (argv < 2) {
