@@ -8,6 +8,9 @@ include_directories(include)
 set(SOURCES
     src/main.cpp
     src/tester.cpp
+    src/makeCopy.cpp
+    src/installPackage.cpp
+    src/difference.cpp
     utils/global.cpp
     utils/utils.cpp
 )

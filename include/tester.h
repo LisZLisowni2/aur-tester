@@ -9,6 +9,7 @@ private:
     bool minimalScan;
     std::string package;
     inline void makeCopySystem(const std::string& name);
+    inline void difference(const std::string& name1, const std::string& name2, const std::string& output);
     inline void installPackage();
     inline void scanForMalware();
     inline void scanForRootkit();

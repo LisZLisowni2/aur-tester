@@ -1,6 +1,7 @@
 #include "utils.h"
 #include "tester.h"
 #include "makeCopy.cpp"
+#include "difference.cpp"
 #include <string>
 #include <iostream>
 #include <stdexcept>
@@ -24,6 +25,7 @@ void Tester::installPackage() {
         logCmd("Copy of system after installation");
         makeCopySystem("after");
         logCmd("Different before and after installation");
-        executeCommand("diff --speed-large-files /tmp/before.sort /tmp/after.sort > /tmp/changed.txt");
+        difference("/tmp/before.sort", "/tmp/after.sort", "/tmp/changed.txt");
+        executeCommand("less /tmp/changed.txt");
     }
 }

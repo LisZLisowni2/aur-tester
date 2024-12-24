@@ -1,5 +1,7 @@
 FROM archlinux:latest
-RUN pacman -Syu --noconfirm && pacman -S --noconfirm bash base-devel git shellcheck clamav rkhunter cmake make && useradd -m buildtest && echo "buildtest ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers 
+RUN pacman -Syu --noconfirm 
+RUN pacman -S --noconfirm linux base linux-firmware less bash base-devel git shellcheck clamav rkhunter cmake make 
+RUN useradd -m buildtest && echo "buildtest ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers 
 WORKDIR /home/buildtest/app
 COPY . . 
 RUN cmake . && make 
