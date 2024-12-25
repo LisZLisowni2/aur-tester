@@ -1,5 +1,6 @@
 #ifndef TESTER_H
 #define TESTER_H
+#pragma once
 
 #include <string>
 

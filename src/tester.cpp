@@ -20,7 +20,6 @@ Tester::~Tester() {
 
 void Tester::test() {
     installPackage();
-    // differenceFile();
-    // scanForMalware();
-    // scanForRootkit();
+    scanForMalware();
+    // scanForRootkit(); // Doesn't work
 }
