@@ -10,6 +10,8 @@ set(SOURCES
     src/tester.cpp
     src/makeCopy.cpp
     src/installPackage.cpp
+    src/scanMalware.cpp
+    src/scanRootkit.cpp
     src/difference.cpp
     utils/global.cpp
     utils/utils.cpp

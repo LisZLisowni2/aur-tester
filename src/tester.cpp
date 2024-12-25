@@ -1,6 +1,8 @@
 #include "tester.h"
 #include "utils.h"
 #include "installPackage.cpp"
+#include "scanMalware.cpp"
+#include "scanRootkit.cpp"
 #include <string>
 #include <iostream>
 #include <stdexcept>

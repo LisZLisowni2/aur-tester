@@ -26,6 +26,5 @@ void Tester::installPackage() {
         makeCopySystem("after");
         logCmd("Different before and after installation");
         difference("/tmp/before.sort", "/tmp/after.sort", "/tmp/changed.txt");
-        executeCommand("less /tmp/changed.txt");
     }
 }
