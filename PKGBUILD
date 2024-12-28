@@ -18,7 +18,7 @@ package() {
 	install -Dm644 "LICENSE" "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
 }
 
-post_install() {
+build() {
 	echo "Configuring Docker for user $(whoami)..."
 	systemctl start docker
 	if ! [ -w docker version ]; then
