@@ -21,8 +21,11 @@ package() {
 post_install() {
 	echo "Configuring Docker for user $(whoami)..."
 	systemctl start docker
+	if ! [ -w docker version ]; then
+		chmod 666 /var/run/docker.sock	
+	fi
+
 	if ! groups $(whoami) | grep -qw docker; then 
-		sudo groupadd -f docker
 		sudo usermod -aG docker $(whoami)
 		echo "User $(whoami) added to Docker group, Please log out and log back in for this to take effect"
 	else
