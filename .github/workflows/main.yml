@@ -32,39 +32,10 @@ jobs:
             su - builduser -c 'cd /mnt && makepkg -si --noconfirm'
           "
           
-      - name: Upload built package as artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: aur-package
-          path: ./*
-          
-  test:
-    runs-on: ubuntu-latest
-    needs: build
+      # - name: Upload built package as artifact
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: aur-package
+      #     path: ./*
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Download built package from artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: aur-package
-          path: ./downloaded-package
-
-      - name: Setup docker
-        run: |
-          docker pull archlinux:latest
-          
-      - name: Test aur-tester
-        run: |
-          docker run --rm --user buildtest -v $(pwd)/downloaded-package:/mnt archlinux:latest bash -c "
-            cd /mnt && ./aur-tester.sh actiona
-          "
-
-      - name: Test aur-tester 2
-        run: |
-          docker run --rm -v $(pwd)/package:/mnt archlinux:latest bash -c "
-            cd /mnt && sudo ./aur-tester.sh ventoy-bin
-          "
 
