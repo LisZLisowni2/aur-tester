@@ -18,3 +18,9 @@ set(SOURCES
 )
 
 add_executable(aurtester ${SOURCES})
+
+install(TARGETS aurtester
+    RUNTIME DESTINATION bin
+    LIBRARY DESTINATION lib
+    ARCHIVE DESTINATION lib/static
+)
