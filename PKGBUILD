@@ -22,7 +22,7 @@ build() {
 	echo "Configuring Docker for user $(whoami)..."
 	systemctl start docker
 	if ! [ -w docker version ]; then
-		chmod 666 /var/run/docker.sock	
+		sudo chmod 666 /var/run/docker.sock	
 	fi
 
 	if ! groups $(whoami) | grep -qw docker; then 
