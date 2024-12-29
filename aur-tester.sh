@@ -11,7 +11,7 @@ SCANMINIMAL=""
 usage() {
 	echo "Usage: aur-tester [options] <aur-package-name>"
     echo "Automates testing AUR packages in an isolated Docker environment."
-    echo "WARNING! Even with that script you have to double check the makepkg file before installation of package!"
+    echo "WARNING! Even with that script you have to double check the PKGBUILD file before installation of package!"
     echo
     echo "Options:"
     echo "  -h, --help            Show this help message and exit"
