@@ -69,7 +69,7 @@ log() {
 }
 
 test_docker_service() {
-    if ! systemctl is-active --quiet docker; then
+    if ! systemctl is-active docker; then
         sudo systemctl start docker
     fi
 }

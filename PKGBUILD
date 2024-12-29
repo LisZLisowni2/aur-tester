@@ -9,7 +9,7 @@ depends=('docker' 'bash')
 source=("Dockerfile" "aur-tester.sh" "LICENSE")
 sha256sums=('SKIP' 'SKIP' 'SKIP')
 
-build() {
+prepare() {
 	chmod +x $srcdir/aur-tester.sh
 }
 
